@@ -5,7 +5,7 @@ class DishDetail extends Component {
  constructor(props) {
   super(props);
   this.state = {
-   dish: this.props.selectedDish,
+   dish: this.props.dish,
   };
  }
 
@@ -32,7 +32,7 @@ class DishDetail extends Component {
       <br />
       <p>{elem.comment}</p>
       --- <span>{elem.author}, </span>
-      <span>{elem.date}</span>
+      <span>{new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "2-digit" }).format(new Date(Date.parse(elem.date)))}</span>
      </div>
     );
    });
@@ -49,9 +49,11 @@ class DishDetail extends Component {
 
  render() {
   return (
-   <div className="row">
-    <div className="col-12 col-md-5 mt-4">{this.renderDish(this.props.selectedDish)}</div>
-    <div className="col-12 col-md-5 mt-4">{this.renderComments(this.props.selectedDish)}</div>
+   <div className="container">
+    <div className="row">
+     <div className="col-12 col-md-5 mt-4">{this.renderDish(this.props.dish)}</div>
+     <div className="col-12 col-md-5 mt-4">{this.renderComments(this.props.dish)}</div>
+    </div>
    </div>
   );
  }
